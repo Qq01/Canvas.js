@@ -1,5 +1,5 @@
 "use strict";
-console.log('Canvas.js start '+new Date());
+// console.log('Canvas.js start '+new Date());
 class Path	//describes canvas path
 {
 	constructor()
@@ -131,67 +131,52 @@ class Canvas
 	
 	set(data)	// replace default settings
 	{
-		if (typeof data != 'undefined' && null)
+		if (typeof data != 'undefined')
 		{
-			typeof data.fillStyle != 'undefined' ? this.settings.fillStyle = data.fillStyle : this.settings.fillStyle;							// replace default background color
-			typeof data.font != 'undefined' ? this.settings.font = data.font : this.settings.font;												// replace default font (interpreted as css font)
-			typeof data.textAlign != 'undefined' ? this.settings.textAlign = data.textAlign : this.settings.textAlign;							// replace default text align
-			typeof data.textBaseline != 'undefined' ? this.settings.textBaseline = data.textBaseline : this.settings.textBaseline;				// replace default text baseline
-			typeof data.direction != 'undefined' ? this.settings.direction = data.direction : this.settings.direction;							// replace default text direction
-			typeof data.strokeStyle != 'undefined' ? this.settings.strokeStyle = data.strokeStyle : this.settings.strokeStyle;					// replace default border color
-			typeof data.lineWidth != 'undefined' ? this.settings.lineWidth = data.lineWidth : this.settings.lineWidth;							// replace default line width
-			typeof data.lineCap != 'undefined' ? this.settings.lineCap = data.lineCap : this.settings.lineCap;									// replace default line cap
-			typeof data.lineJoin != 'undefined' ? this.settings.lineJoin = data.lineJoin : this.settings.lineJoin;								// replace default line join
-			typeof data.miterLimit != 'undefined' ? this.settings.miterLimit = data.miterLimit : this.settings.miterLimit;						// replace default miter limit
-			typeof data.setLineDash != 'undefined' ? this.settings.setLineDash = data.setLineDash : this.settings.setLineDash;					// replace default line dash
-			typeof data.lineDashOffset  != 'undefined' ? this.settings.lineDashOffset  = data.lineDashOffset  : this.settings.lineDashOffset ;	// replace default line dash offset
-			typeof data.shadowColor  != 'undefined' ? this.settings.shadowColor  = data.shadowColor  : this.settings.shadowColor ;				// replace default shadow color
-			typeof data.shadowBlur  != 'undefined' ? this.settings.shadowBlur  = data.shadowBlur  : this.settings.shadowBlur ;					// replace default shadow blur
-			typeof data.shadowOffsetX  != 'undefined' ? this.settings.shadowOffsetX  = data.shadowOffsetX  : this.settings.shadowOffsetX ;		// replace default shadow x-axis offset
-			typeof data.shadowOffsetY  != 'undefined' ? this.settings.shadowOffsetY  = data.shadowOffsetY  : this.settings.shadowOffsetY ;		// replace default shadow y-axis offset
+			typeof data.fillStyle != 'undefined'		? this.settings.fillStyle		= this.ctx.fillStyle		= data.fillStyle		: this.settings.fillStyle;		// replace default background color
+			typeof data.font != 'undefined'				? this.settings.font			= this.ctx.font				= data.font				: this.settings.font;			// replace default font (interpreted as css font)
+			typeof data.textAlign != 'undefined'		? this.settings.textAlign		= this.ctx.textAlign		= data.textAlign		: this.settings.textAlign;		// replace default text align
+			typeof data.textBaseline != 'undefined' 	? this.settings.textBaseline	= this.ctx.textBaseline		= data.textBaseline		: this.settings.textBaseline;	// replace default text baseline
+			typeof data.direction != 'undefined'		? this.settings.direction		= this.ctx.direction		= data.direction		: this.settings.direction;		// replace default text direction
+			typeof data.strokeStyle != 'undefined'		? this.settings.strokeStyle		= this.ctx.strokeStyle		= data.strokeStyle		: this.settings.strokeStyle;	// replace default border color
+			typeof data.lineWidth != 'undefined'		? this.settings.lineWidth		= this.ctx.lineWidth		= data.lineWidth		: this.settings.lineWidth;		// replace default line width
+			typeof data.lineCap != 'undefined'			? this.settings.lineCap			= this.ctx.lineCap			= data.lineCap			: this.settings.lineCap;		// replace default line cap
+			typeof data.lineJoin != 'undefined'			? this.settings.lineJoin		= this.ctx.lineJoin			= data.lineJoin			: this.settings.lineJoin;		// replace default line join
+			typeof data.miterLimit != 'undefined'		? this.settings.miterLimit		= this.ctx.miterLimit		= data.miterLimit		: this.settings.miterLimit;		// replace default miter limit
+			typeof data.setLineDash != 'undefined'		? this.settings.setLineDash		= this.ctx.setLineDash		= data.setLineDash		: this.settings.setLineDash;	// replace default line dash
+			typeof data.lineDashOffset  != 'undefined'	? this.settings.lineDashOffset	= this.ctx.lineDashOffset	= data.lineDashOffset	: this.settings.lineDashOffset;	// replace default line dash offset
+			typeof data.shadowColor  != 'undefined'		? this.settings.shadowColor		= this.ctx.shadowColor		= data.shadowColor		: this.settings.shadowColor;	// replace default shadow color
+			typeof data.shadowBlur  != 'undefined'		? this.settings.shadowBlur		= this.ctx.shadowBlur		= data.shadowBlur		: this.settings.shadowBlur;		// replace default shadow blur
+			typeof data.shadowOffsetX  != 'undefined'	? this.settings.shadowOffsetX	= this.ctx.shadowOffsetX	= data.shadowOffsetX	: this.settings.shadowOffsetX;	// replace default shadow x-axis offset
+			typeof data.shadowOffsetY  != 'undefined'	? this.settings.shadowOffsetY	= this.ctx.shadowOffsetY	= data.shadowOffsetY	: this.settings.shadowOffsetY;	// replace default shadow y-axis offset
 		}
 		
 		return this;
 	}
 	
-	rect(data, sets)	// draw rectangular
+	rect(data)	// draw rectangular
 	{
-		if (typeof sets != 'undefined' && null)
+		if (typeof data == 'object')
 		{
-			typeof sets.fillStyle != 'undefined' ? this.ctx.fillStyle = sets.fillStyle : this.ctx.fillStyle = this.settings.fillStyle;
-			typeof sets.strokeStyle != 'undefined' ? this.ctx.strokeStyle = sets.strokeStyle : this.ctx.strokeStyle = this.settings.strokeStyle;
-			typeof sets.shadowColor != 'undefined' ? this.ctx.shadowColor = sets.shadowColor : this.ctx.shadowColor = this.settings.shadowColor;
-			typeof sets.shadowOffsetX != 'undefined' ? this.ctx.shadowOffsetX = sets.shadowOffsetX : this.ctx.shadowOffsetX = this.settings.shadowOffsetX;
-			typeof sets.shadowOffsetY != 'undefined' ? this.ctx.shadowOffsetY = sets.shadowOffsetY : this.ctx.shadowOffsetY = this.settings.shadowOffsetY;
+			this.ctx.fillRect(data.x, data.y, data.w, data.h);
 		}
-		this.ctx.fillRect(data.x || data[0], data.y || data[1], data.w || data[2], data.h || data[3]);
+		else
+		{
+			this.ctx.fillRect(arguments[0], arguments[1], arguments[2], arguments[3]);
+		}
 		return this;
 	}
 	
-	text(data, sets)
+	text(data)
 	{
-		if (typeof sets != 'undefined' && null)
-		{
-			typeof sets.font != 'undefined' ? this.ctx.font = sets.font : this.ctx.font = this.settings.font;
-			typeof sets.textAlign != 'undefined' ? this.ctx.textAlign = sets.textAlign : this.ctx.textAlign = this.settings.textAlign;
-			typeof sets.textBaseline != 'undefined' ? this.ctx.textBaseline = sets.textBaseline : this.ctx.textBaseline = this.settings.textBaseline;
-			typeof sets.direction != 'undefined' ? this.ctx.direction = sets.direction : this.ctx.direction = this.settings.direction;
-			typeof sets.fillStyle != 'undefined' ? this.ctx.fillStyle = sets.fillStyle : this.ctx.fillStyle = this.settings.fillStyle;
-			typeof sets.strokeStyle != 'undefined' ? this.ctx.strokeStyle = sets.strokeStyle : this.ctx.strokeStyle = this.settings.strokeStyle;
-			typeof sets.shadowColor != 'undefined' ? this.ctx.shadowColor = sets.shadowColor : this.ctx.shadowColor = this.settings.shadowColor;
-			typeof sets.shadowBlur != 'undefined' ? this.ctx.shadowBlur = sets.shadowBlur : this.ctx.strokeStyle = this.settings.shadowBlur;
-			typeof sets.shadowOffsetX != 'undefined' ? this.ctx.shadowOffsetX = sets.shadowOffsetX : this.ctx.shadowOffsetX = this.settings.shadowOffsetX;
-			typeof sets.shadowOffsetY != 'undefined' ? this.ctx.shadowOffsetY = sets.shadowOffsetY : this.ctx.shadowOffsetY = this.settings.shadowOffsetY;
-		}
-		
 		var d =
 		{
-			text:	data.text || data[0],
-			x:		data.x || data[1],
-			y:		data.y || data[2],
+			text:	data.text,
+			x:		data.x,
+			y:		data.y,
 			type:	data.type || 'normal'	// 'normal' || 'stroke' || 'both'
 		}
-		if (typeof data.maxWidth != 'undefined' || typeof data[3] != 'undefined' && data.type != data[3])
+		if (typeof data.maxWidth != 'undefined')
 		{
 			d.maxWidth = data.maxWidth || data[3];
 			if (d.type == 'normal' || 'both')
@@ -218,12 +203,8 @@ class Canvas
 		return this;
 	}
 	
-	textSize(data, sets, transfer)
+	textSize(data, transfer)
 	{
-		if (typeof sets != 'undefined' && null)
-		{
-				typeof sets.font != 'undefined' ? this.ctx.font = sets.font : this.ctx.font = this.settings.font;
-		}
 		if (typeof transfer == 'string')
 		{
 			this.vars[transfer] = this.ctx.measureText(data).width;
@@ -234,7 +215,7 @@ class Canvas
 		}
 	}
 	
-	path(data, sets)
+	path(data)
 	{
 		var d = [];
 		if (data.name == 'path')
@@ -327,4 +308,4 @@ class Canvas
 		return this.ctx.createPattern(data.img || data[0], data.repeat || data[1]);
 	}
 }
-console.log('Canvas.js ready '+new Date());
+// console.log('Canvas.js ready '+new Date());
