@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="pl" >
+	<head>
+		<title>Canvas</title>
+		<script src="Canvas.js" ></script>
+	</head>
+	<body>
+		<canvas width="100" height="100" id="c" ></canvas>
+		<script>
+		"use strict";
+		var canvas = new Canvas('c');
+		var p = new Path();
+		p.path = {type:'move','x':25,'y':25};
+		p.path = {type:'line','x':50,'y':50};
+		canvas.rect([20,5,10,15]).path(p);
+		</script>
+	</body>
+</html>
